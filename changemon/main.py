@@ -22,6 +22,7 @@ class Settings(BaseSettings):
     appinfo_dir: Path
     steam_user: str
     steam_password: str
+    steam_id_base: int
     web_pipes_url: str
 
 asyncio.set_event_loop_policy(asyncio_gevent.EventLoopPolicy())
@@ -47,7 +48,7 @@ def handle_disconnect():
         client.reconnect(maxdelay=30)
         client.relogin()
 
-client.login(settings.steam_user, settings.steam_password, login_id=12)
+client.login(settings.steam_user, settings.steam_password, login_id=settings.steam_id_base + 12)
 
 POE_APP_ID = 238960
 
